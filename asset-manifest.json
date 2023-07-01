@@ -1,15 +1,15 @@
 {
   "files": {
-    "main.css": "/react-doki/static/css/main.8af65ff2.css",
-    "main.js": "/react-doki/static/js/main.e5afec63.js",
+    "main.css": "/react-doki/static/css/main.2d408440.css",
+    "main.js": "/react-doki/static/js/main.b3816323.js",
     "static/js/787.41e984a2.chunk.js": "/react-doki/static/js/787.41e984a2.chunk.js",
     "index.html": "/react-doki/index.html",
-    "main.8af65ff2.css.map": "/react-doki/static/css/main.8af65ff2.css.map",
-    "main.e5afec63.js.map": "/react-doki/static/js/main.e5afec63.js.map",
+    "main.2d408440.css.map": "/react-doki/static/css/main.2d408440.css.map",
+    "main.b3816323.js.map": "/react-doki/static/js/main.b3816323.js.map",
     "787.41e984a2.chunk.js.map": "/react-doki/static/js/787.41e984a2.chunk.js.map"
   },
   "entrypoints": [
-    "static/css/main.8af65ff2.css",
-    "static/js/main.e5afec63.js"
+    "static/css/main.2d408440.css",
+    "static/js/main.b3816323.js"
   ]
 }
