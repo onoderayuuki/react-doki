@@ -26,7 +26,7 @@ const App: React.FC = () => {
   ,'60_mesh.html']; // チェックボックスの選択肢の配列
 
 // APIからデータを取得
-  // 土器名一蘭
+  // 土器名一覧
 const fetchDokis = async () => {
   try {
     const response = await fetch('http://localhost:4000/dokis');
@@ -45,9 +45,8 @@ const fetchImageUrls = async () => {
     const params = new URLSearchParams();
     params.append('doki', selectedDoki);
 
-    const url_true = `http://localhost:4000/pngs?${params.toString()}`;
-    const url = `http://localhost:4000/pngs`;
-    setPngUrls(url_true);  // Debug
+    const url = `http://localhost:4000/pngs?${params.toString()}`;
+    setPngUrls(url);  // Debug
 
     const response = await fetch(url, {
       method: 'GET',
@@ -73,9 +72,9 @@ const fetchData = async (selectedOptions: string[]) => {
       params.append(`param${index + 1}`, option);
     });
 
-    const url_true = `http://localhost:4000/urls?${params.toString()}`;
-    const url = `http://localhost:4000/htmls`;
-    setUrls(url_true);  // Debug
+    const url = `http://localhost:4000/urls?${params.toString()}`;
+    // const url = `http://localhost:4000/htmls`;
+    setUrls(url);  // Debug
     
     const response = await fetch(url, {
       method: 'GET',
@@ -113,10 +112,10 @@ const fetchData = async (selectedOptions: string[]) => {
     setSelectedDoki(value);
   };
 
-// トリガー
+// フック
   useEffect(() => {
     fetchDokis();
-  }, [dokis]);
+  }, []);
 
   useEffect(() => {
     fetchImageUrls();
