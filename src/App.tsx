@@ -3,30 +3,40 @@ import './App.css';
 
 const App: React.FC = () => {
   const [selectedOptions, setSelectedOptions] = useState<string[]>([]);
+  const [selectedDoki, setSelectedDoki] = useState<string>('aaa');
   const [iframePaths, setIframePaths] = useState<string[]>([]);
+  const [urls, setUrls] = useState<string>('aaa');
 
-  // APIからデータを取得する関数
-  const fetchData = async (selectedOptions: string[]) => {
-    try {
-      const response = await fetch('http://localhost:4000/urls', {
-        method: 'POST',
-        headers: {
-          'Content-Type': 'application/json',
-        },
-        body: JSON.stringify({ options: selectedOptions }),
-      });
+// APIからデータを取得する関数
+const fetchData = async (selectedOptions: string[]) => {
+  try {
+    const params = new URLSearchParams();
+    params.append('doki', selectedDoki);
+    selectedOptions.forEach((option, index) => {
+      params.append(`param${index + 1}`, option);
+    });
 
-      if (!response.ok) {
-        throw new Error('API request failed');
-      }
+    // const url = `http://localhost:4000/urls?${params.toString()}`;
+    const url = `http://localhost:4000/urls`;
+    setUrls(url);  // Debug
+    
+    const response = await fetch(url, {
+      method: 'GET',
+      headers: {
+        'Content-Type': 'application/json',
+      },
+    });
 
-      const data = await response.json();
-      setIframePaths(data.urls);
-      // setIframePaths(["https://storage.googleapis.com/dokis/docs/20230506-B01-01/00_pcd_file.html"]);
-    } catch (error) {
-      console.error(error);
+    if (!response.ok) {
+      throw new Error('API request failed');
     }
-  };
+
+    const data = await response.json();
+    setIframePaths(data.urls);
+  } catch (error) {
+    console.error(error);
+  }
+};
 
   const handleCheckboxChange = (event: React.ChangeEvent<HTMLInputElement>) => {
     const { value, checked } = event.target;
@@ -42,7 +52,7 @@ const App: React.FC = () => {
   const handleSelectChange = (event: React.ChangeEvent<HTMLSelectElement>) => {
     const { value } = event.target;
     // setIframePaths(["https://storage.googleapis.com/dokis/docs/20230506-B01-01/00_pcd_file.html"]);
-    // セレクトボックスの値に基づいて処理を実行する
+    setSelectedDoki(value);
   };
 
   useEffect(() => {
@@ -91,11 +101,12 @@ const App: React.FC = () => {
           </label>
         </div>
         <div className="main">
-          <h2>Iframes</h2>
+          <h2>{urls}</h2>
           {/* 選択されたチェックボックスの数だけiframeを表示 */}
           {iframePaths.map((path) => (
-            <div>{path}
-              <iframe title={path} key={path} src={path} />
+            <div> 
+              {/* {path} */}
+              <iframe title={path} key={path} src={path} />              
             </div>
           ))}
         </div>
