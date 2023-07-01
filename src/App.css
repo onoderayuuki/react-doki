@@ -1,13 +1,19 @@
 .App {
   text-align: center;
 }
-
+header{
+  display: flex;
+}
 .App-header {
   background-color: #282c34;
-  padding: 20px;
+  padding: 1px 30px;
   color: white;
-}
+  text-align: left;
 
+}
+select{
+  margin-left:100px
+}
 .content {
   display: flex;
 }
@@ -18,9 +24,45 @@
   background-color: #f0f0f0;
 }
 
+.image-list-container {
+  width: 100%;
+  overflow-x: auto;
+}
+
+.image-list {
+  display: flex;
+  flex-wrap: nowrap;
+}
+
+.image-list img {
+  flex: 0 0 auto;
+  width: calc(33%); /* イメージの幅を調整してください */
+  height: auto;
+  margin-right: 10px; /* イメージ間の間隔を調整してください */
+}
+
+
+label {
+  display: block;
+  margin-bottom: 10px;
+  font-size: px; /* フォントサイズを調整してください */
+  text-align: left;
+}
+
+
+
 .main {
-  flex: 6;
+  /* flex: 7; */
   padding: 10px;
+  background-color: #fff;
+
+}
+.iframe-list-container{
+  display: flex;
+}
+
+.iframe-list {
+  flex: 5;
   background-color: #fff;
   display: flex;
   flex-wrap: wrap;

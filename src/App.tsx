@@ -2,12 +2,69 @@ import React, { useState, useEffect } from 'react';
 import './App.css';
 
 const App: React.FC = () => {
-  const [selectedOptions, setSelectedOptions] = useState<string[]>([]);
-  const [selectedDoki, setSelectedDoki] = useState<string>('aaa');
-  const [iframePaths, setIframePaths] = useState<string[]>([]);
-  const [urls, setUrls] = useState<string>('aaa');
 
-// APIからデータを取得する関数
+  const [dokis, setDokis] = useState<string[]>([]);
+  const [selectedDoki, setSelectedDoki] = useState<string>('aaa');
+  const [selectedOptions, setSelectedOptions] = useState<string[]>(['00_pcd_file.html','60_mesh.html']);
+  const [iframePaths, setIframePaths] = useState<string[]>([]);
+  const [imageUrls, setImageUrls] = useState<string[]>([]);
+  const [urls, setUrls] = useState<string>('aaa');// Debug
+  const [pngUrls, setPngUrls] = useState<string>('aaa');// Debug
+
+  const initialOptions = ['00_pcd_file.html'
+  ,'01_pcd_file_color.html'
+  ,'10_clear_noise.html'
+  ,'20_plane_nonplane.html'
+  ,'31_pcd_scaled.html'
+  ,'32_pcd_nonplane_scaled.html'
+  ,'41_blue.html'
+  ,'42pcd_doki.html'
+  ,'43_noise.html'
+  ,'44_pcd_doki2.html'
+  ,'51_tops.html'
+  ,'53_combined_pcd2.html'
+  ,'60_mesh.html']; // チェックボックスの選択肢の配列
+
+// APIからデータを取得
+  // 土器名一蘭
+const fetchDokis = async () => {
+  try {
+    const response = await fetch('http://localhost:4000/dokis');
+    if (!response.ok) {
+      throw new Error('API request failed');
+    }
+    const data = await response.json();
+    setDokis(data.names);
+  } catch (error) {
+    console.error(error);
+  }
+};
+  // 断面図一覧
+const fetchImageUrls = async () => {
+  try {
+    const params = new URLSearchParams();
+    params.append('doki', selectedDoki);
+
+    const url_true = `http://localhost:4000/pngs?${params.toString()}`;
+    const url = `http://localhost:4000/pngs`;
+    setPngUrls(url_true);  // Debug
+
+    const response = await fetch(url, {
+      method: 'GET',
+      headers: {
+        'Content-Type': 'application/json',
+      },
+    });
+    if (!response.ok) {
+      throw new Error('API request failed');
+    }
+    const data = await response.json();
+    setImageUrls(data.urls);
+  } catch (error) {
+    console.error(error);
+  }
+};
+  // 途中経過の３次元HTML一覧
 const fetchData = async (selectedOptions: string[]) => {
   try {
     const params = new URLSearchParams();
@@ -16,9 +73,9 @@ const fetchData = async (selectedOptions: string[]) => {
       params.append(`param${index + 1}`, option);
     });
 
-    // const url = `http://localhost:4000/urls?${params.toString()}`;
-    const url = `http://localhost:4000/urls`;
-    setUrls(url);  // Debug
+    const url_true = `http://localhost:4000/urls?${params.toString()}`;
+    const url = `http://localhost:4000/htmls`;
+    setUrls(url_true);  // Debug
     
     const response = await fetch(url, {
       method: 'GET',
@@ -38,6 +95,7 @@ const fetchData = async (selectedOptions: string[]) => {
   }
 };
 
+// 画面操作
   const handleCheckboxChange = (event: React.ChangeEvent<HTMLInputElement>) => {
     const { value, checked } = event.target;
     if (checked) {
@@ -55,58 +113,77 @@ const fetchData = async (selectedOptions: string[]) => {
     setSelectedDoki(value);
   };
 
+// トリガー
+  useEffect(() => {
+    fetchDokis();
+  }, [dokis]);
+
+  useEffect(() => {
+    fetchImageUrls();
+  }, [selectedDoki]);
+
   useEffect(() => {
     fetchData(selectedOptions);
-  }, [selectedOptions]);
+  }, [selectedOptions, selectedDoki]);
+
 
   return (
     <div className="App">
       <header className="App-header">
-        <h1>SPA with Iframes</h1>
+        <h2>Doki*3 + s</h2>
+          <select value={selectedDoki} onChange={handleSelectChange}>
+          <option value="">Select an option</option>
+          {dokis.map((doki, index) => (
+            <option key={index} value={doki}>
+              {doki}
+            </option>
+          ))}
+        </select>
       </header>
       <div className="content">
-        <div className="sidebar">
-          <h2>Options</h2>
-          <select onChange={handleSelectChange}>
-            <option value="">Select an option</option>
-            {/* セレクトボックスのオプションを追加 */}
-            <option value="option1">Option 1</option>
-            <option value="option2">Option 2</option>
-            <option value="option3">Option 3</option>
-          </select>
-          <h2>Checkbox Options</h2>
-          <label>
-            <input
-              type="checkbox"
-              value="a"
-              onChange={handleCheckboxChange}
-            />{' '}
-            Option A
-          </label>
-          <label>
-            <input
-              type="checkbox"
-              value="b"
-              onChange={handleCheckboxChange}
-            />{' '}
-            Option B
-          </label>
-          <label>
-            <input
-              type="checkbox"
-              value="c"
-              onChange={handleCheckboxChange}
-            />{' '}
-            Option C
-          </label>
-          <h5>{urls}</h5>
+      <div className="main">
+
+        <h3 className="App-header">断面図を選ぶ___{pngUrls}</h3>
+        <div className="image-list-container">
+          <div className="image-list">
+          {imageUrls.length > 0 ? (
+            imageUrls.map((imageUrl, index) => (
+              <img key={index} src={imageUrl} alt={`Image ${index}`} />
+            ))
+          ) : (
+            <p>No images found.</p>
+          )}
+          </div>
         </div>
-        <div className="main">
-          
-          {iframePaths.map((path) => (            
+        <h3 className="App-header">過程を確認する_____ {urls}</h3>
+        <div className="iframe-list-container">
+          <div className="iframe-list">
+            {iframePaths.map((path) => (            
               <iframe title={path} key={path} src={path} />              
-          ))}
+            ))}
+          </div>
+          <div className="sidebar">
+            {initialOptions.map((option) => (
+              <label key={option}>
+                <input
+                  type="checkbox"
+                  value={option}
+                  checked={selectedOptions.includes(option)}
+                  onChange={handleCheckboxChange}
+                />
+                {option}
+              </label>
+            ))}
+            </div>
         </div>
+
+        </div>
+
+
+
+
+
+
       </div>
     </div>
   );

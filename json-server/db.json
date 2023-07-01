@@ -1,5 +1,5 @@
 {
-  "urls": {
+  "htmls": {
       "urls": [
         "https://storage.googleapis.com/dokis/docs/20230506-B01-01/00_pcd_file.html",
         "https://storage.googleapis.com/dokis/docs/20230506-B01-01/00_pcd_file.html",
@@ -8,4 +8,29 @@
         "https://storage.googleapis.com/dokis/docs/20230506-B01-01/01_pcd_file_color.html"
       ]
     }
+  ,"pngs": {
+    "urls": [
+    "https://storage.googleapis.com/dokis/docs/20230506-B01-01/slice.png",
+    "https://storage.googleapis.com/dokis/docs/20230506-B01-01/slice.png",
+    "https://storage.googleapis.com/dokis/docs/20230506-B01-01/slice.png"
+    ]
+  }
+  ,"dokis": {
+    "names": [
+    "20230506-B01-01",
+    "20230506-J04-01_brightest",
+    "20230506-B01-02",
+    "20230506-J05-01",
+    "20230506-B02-01",
+    "20230506-J06-01",
+    "20230506-B03-01",
+    "20230514-B01-01",
+    "20230506-B04-01",
+    "20230514-J01-01",
+    "20230506-J01-01colorful",
+    "20230514-J01-02",
+    "20230506-J02-01",
+    "20230506-J03-01" 
+    ]
+  }
 }
