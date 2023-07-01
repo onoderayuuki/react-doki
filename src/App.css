@@ -4,6 +4,10 @@
 header{
   display: flex;
 }
+.selector{
+  flex:1;
+  display: flex;
+}
 .App-header {
   background-color: #282c34;
   padding: 1px 30px;
@@ -11,9 +15,20 @@ header{
   text-align: left;
 
 }
-select{
-  margin-left:100px
+select {
+  margin-left:20px;
+  font-size: 18px; /* フォントサイズを調整してください */
+  width:300px;
+  background-color: #282c34;
+  border-color: #282c34;
+  color: white;
+  border:none;
+
 }
+select:focus {
+  outline: none;
+}
+
 .content {
   display: flex;
 }
@@ -42,13 +57,14 @@ select{
 }
 
 
+
+
 label {
   display: block;
   margin-bottom: 10px;
-  font-size: px; /* フォントサイズを調整してください */
+  font-size: 17px; /* フォントサイズを調整してください */
   text-align: left;
 }
-
 
 
 .main {

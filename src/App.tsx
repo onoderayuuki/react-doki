@@ -72,8 +72,7 @@ const fetchData = async (selectedOptions: string[]) => {
       params.append(`param${index + 1}`, option);
     });
 
-    const url = `http://localhost:4000/urls?${params.toString()}`;
-    // const url = `http://localhost:4000/htmls`;
+    const url = `http://localhost:4000/htmls?${params.toString()}`;
     setUrls(url);  // Debug
     
     const response = await fetch(url, {
@@ -129,16 +128,20 @@ const fetchData = async (selectedOptions: string[]) => {
   return (
     <div className="App">
       <header className="App-header">
-        <h2>Doki*3 + s</h2>
-          <select value={selectedDoki} onChange={handleSelectChange}>
-          <option value="">Select an option</option>
+        <div className="selector">
+        <h3>土器を選択 : </h3>
+        <select value={selectedDoki} onChange={handleSelectChange}>
+        <option value="">None</option>
           {dokis.map((doki, index) => (
             <option key={index} value={doki}>
               {doki}
             </option>
           ))}
         </select>
+        </div>
+        <h2>Doki*3 + s</h2>
       </header>
+      
       <div className="content">
       <div className="main">
 
@@ -154,6 +157,7 @@ const fetchData = async (selectedOptions: string[]) => {
           )}
           </div>
         </div>
+
         <h3 className="App-header">過程を確認する_____ {urls}</h3>
         <div className="iframe-list-container">
           <div className="iframe-list">
@@ -176,14 +180,9 @@ const fetchData = async (selectedOptions: string[]) => {
             </div>
         </div>
 
-        </div>
-
-
-
-
-
-
       </div>
+      </div>
+
     </div>
   );
 };
