@@ -1,5 +1,6 @@
 {
   "name": "react-doki",
+  "homepage": "https://onoderayuuki.github.io/react-doki/build",
   "version": "0.1.0",
   "private": true,
   "dependencies": {
