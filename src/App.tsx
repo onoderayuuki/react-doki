@@ -103,7 +103,6 @@ const fetchData = async (selectedOptions: string[]) => {
         </div>
         <div className="main">
           
-          {/* 選択されたチェックボックスの数だけiframeを表示 */}
           {iframePaths.map((path) => (            
               <iframe title={path} key={path} src={path} />              
           ))}
