@@ -46,6 +46,6 @@ You can learn more in the [Create React App documentation](https://facebook.gith
 
 To learn React, check out the [React documentation](https://reactjs.org/).
 
-## npm start
-json-server --watch json-server/db.json --port 4000
+## Mock:json-server 
+npx json-server --watch json-server/db.json --port 4000
 curl http://localhost:4000/urls

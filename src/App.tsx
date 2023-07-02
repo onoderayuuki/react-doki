@@ -29,7 +29,9 @@ const App: React.FC = () => {
   // 土器名一覧
 const fetchDokis = async () => {
   try {
-    const response = await fetch('http://localhost:4000/dokis');
+    // const api_url = 'http://localhost:4000/dokis'
+    const api_url = 'https://us-west1-doki-391416.cloudfunctions.net/doki-name'
+    const response = await fetch(api_url);
     if (!response.ok) {
       throw new Error('API request failed');
     }
