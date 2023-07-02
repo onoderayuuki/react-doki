@@ -1,5 +1,6 @@
 import React, { useState, useEffect } from 'react';
 import './App.css';
+import DownloadButton from './Down';
 
 const App: React.FC = () => {
 
@@ -152,7 +153,10 @@ const fetchData = async (selectedOptions: string[]) => {
           <div className="image-list">
           {imageUrls.length > 0 ? (
             imageUrls.map((imageUrl, index) => (
-              <img key={index} src={imageUrl} alt={`Image ${index}`} />
+              <div key={index} className="image-item">
+                <img src={imageUrl} alt={`Danmens-${index}`} />
+                <DownloadButton url={imageUrl} filename={`image_${index}`} />
+              </div>
             ))
           ) : (
             <p>No images found.</p>

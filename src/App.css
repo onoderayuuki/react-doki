@@ -44,10 +44,7 @@ select:focus {
   overflow-x: auto;
 }
 
-.image-list {
-  display: flex;
-  flex-wrap: nowrap;
-}
+
 
 .image-list img {
   flex: 0 0 auto;
@@ -55,6 +52,43 @@ select:focus {
   height: auto;
   margin-right: 10px; /* イメージ間の間隔を調整してください */
 }
+
+.image-list {
+  display: flex;
+  flex-wrap: nowrap;
+}
+
+.image-list .image-item {
+  flex: 0 0 auto;
+  width: calc(33%); /* イメージの幅を調整してください */
+  position: relative;
+  margin-right: 10px;
+  /* margin-bottom: 20px; */
+}
+
+.image-list .image-item img {
+  width: 100%;
+  height: auto;
+}
+
+.image-list .image-item .download-button {
+  position: absolute;
+  top: 10px;
+  right: 10px;
+  padding: 8px 12px;
+  background-color: #282c34;
+  font-weight: bold;
+  color: #fff;
+  border: none;
+  border-radius: 4px;
+  cursor: pointer;
+}
+
+.image-list .image-item .download-button:hover {
+  background-color: #5B666D;
+  font-weight: bold;
+}
+
 
 
 
