@@ -1,5 +1,5 @@
 {
-  "htmls": {
+  "list_tochus": {
       "urls": [
         "https://storage.googleapis.com/dokis/docs/20230506-B01-01/00_pcd_file.html",
         "https://storage.googleapis.com/dokis/docs/20230506-B01-01/00_pcd_file.html",
@@ -8,14 +8,14 @@
         "https://storage.googleapis.com/dokis/docs/20230506-B01-01/01_pcd_file_color.html"
       ]
     }
-  ,"pngs": {
+  ,"list_danmens": {
     "urls": [
     "https://storage.googleapis.com/dokis/docs/20230506-B01-01/slice.png",
     "https://storage.googleapis.com/dokis/docs/20230506-B01-01/slice.png",
     "https://storage.googleapis.com/dokis/docs/20230506-B01-01/slice.png"
     ]
   }
-  ,"dokis": {
+  ,"list_dokis": {
     "names": [
     "20230506-B01-01",
     "20230506-J04-01_brightest",

@@ -29,8 +29,8 @@ const App: React.FC = () => {
   // 土器名一覧
 const fetchDokis = async () => {
   try {
-    // const api_url = 'http://localhost:4000/dokis'
-    const api_url = 'https://us-west1-doki-391416.cloudfunctions.net/doki-name'
+    // const api_url = 'http://localhost:4000/list_dokis'
+    const api_url = 'https://us-west1-doki-391416.cloudfunctions.net/list_dokis'
     const response = await fetch(api_url);
     if (!response.ok) {
       throw new Error('API request failed');
@@ -46,11 +46,11 @@ const fetchImageUrls = async () => {
   try {
     const params = new URLSearchParams();
     params.append('doki', selectedDoki);
+    const api_url = `https://us-west1-doki-391416.cloudfunctions.net/list_danmens?${params.toString()}`
+    // const api_url = `http://localhost:4000/list_danmens?${params.toString()}`;
+    setPngUrls(api_url);  // Debug
 
-    const url = `http://localhost:4000/pngs?${params.toString()}`;
-    setPngUrls(url);  // Debug
-
-    const response = await fetch(url, {
+    const response = await fetch(api_url, {
       method: 'GET',
       headers: {
         'Content-Type': 'application/json',
