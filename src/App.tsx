@@ -8,8 +8,8 @@ const App: React.FC = () => {
   const [selectedOptions, setSelectedOptions] = useState<string[]>(['00_pcd_file.html','60_mesh.html']);
   const [iframePaths, setIframePaths] = useState<string[]>([]);
   const [imageUrls, setImageUrls] = useState<string[]>([]);
-  const [urls, setUrls] = useState<string>('aaa');// Debug
-  const [pngUrls, setPngUrls] = useState<string>('aaa');// Debug
+  const [urls, setUrls] = useState<string>('');// Debug
+  const [pngUrls, setPngUrls] = useState<string>('');// Debug
 
   const initialOptions = ['00_pcd_file.html'
   ,'01_pcd_file_color.html'
@@ -48,7 +48,7 @@ const fetchImageUrls = async () => {
     params.append('doki', selectedDoki);
     const api_url = `https://us-west1-doki-391416.cloudfunctions.net/list_danmens?${params.toString()}`
     // const api_url = `http://localhost:4000/list_danmens?${params.toString()}`;
-    setPngUrls(api_url);  // Debug
+    // setPngUrls(api_url);  // Debug
 
     const response = await fetch(api_url, {
       method: 'GET',
@@ -73,11 +73,11 @@ const fetchData = async (selectedOptions: string[]) => {
     selectedOptions.forEach((option, index) => {
       params.append(`param${index + 1}`, option);
     });
-
-    const url = `http://localhost:4000/htmls?${params.toString()}`;
-    setUrls(url);  // Debug
+    const api_url = `https://us-west1-doki-391416.cloudfunctions.net/list_tochus?${params.toString()}`;
+    // const api_url = `http://localhost:4000/list_tochus?${params.toString()}`;
+    // setUrls(api_url);  // Debug
     
-    const response = await fetch(url, {
+    const response = await fetch(api_url, {
       method: 'GET',
       headers: {
         'Content-Type': 'application/json',
@@ -160,7 +160,7 @@ const fetchData = async (selectedOptions: string[]) => {
           </div>
         </div>
 
-        <h3 className="App-header">過程を確認する_____ {urls}</h3>
+        <h3 className="App-header">過程を確認する___ {urls}</h3>
         <div className="iframe-list-container">
           <div className="iframe-list">
             {iframePaths.map((path) => (            
